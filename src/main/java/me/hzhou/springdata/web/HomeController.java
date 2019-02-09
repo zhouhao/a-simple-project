@@ -1,9 +1,9 @@
 package me.hzhou.springdata.web;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,12 +21,7 @@ public class HomeController {
     }
 
     @GetMapping("/todo")
-    public Todo create() {
-        Todo todo = new Todo();
-        todo.setContent("Hello World");
-        todo.setPhone("+15083359815");
-        todo.setRemindTime(new Timestamp(new Date().getTime()));
-        todoRepository.save(todo);
-        return todo;
+    public ResponseEntity<Todo> create(@Valid Todo todo) {
+        return ResponseEntity.ok(todoRepository.save(todo));
     }
 }

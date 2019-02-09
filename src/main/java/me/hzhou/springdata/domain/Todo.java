@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 
@@ -23,9 +24,11 @@ public class Todo implements Serializable {
     @Column(name = "id", insertable = false, nullable = false)
     private Integer id;
 
+    @NotNull
     @Column(name = "content", nullable = false)
     private String content;
 
+    @NotNull
     @Column(name = "phone", nullable = false)
     private String phone;
 
@@ -35,6 +38,7 @@ public class Todo implements Serializable {
     @Column(name = "created_time")
     private Timestamp createdTime;
 
+    @NotNull
     @Column(name = "remind_time", nullable = false)
     private Timestamp remindTime;
 
