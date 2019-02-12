@@ -1,7 +1,6 @@
 FROM openjdk:11-jre
 
-ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/myservice/myservice.jar"]
+ENTRYPOINT ["/usr/bin/java", "-jar", "/usr/share/todo/todo.jar"]
 
 # Add the service itself
-ARG JAR_FILE
-ADD target/${JAR_FILE} /usr/share/myservice/myservice.jar
+ADD target/todo-service.jar /usr/share/todo/todo.jar
