@@ -1,8 +1,7 @@
 package me.hzhou.springdata.domain;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,22 +39,9 @@ public class Todo implements Serializable {
     private boolean isCompleted = false;
 
     @Column(name = "created_time")
-    private Timestamp createdTime;
+    private LocalDateTime createdTime;
 
     @NotNull
     @Column(name = "remind_time", nullable = false)
-    private Timestamp remindTime;
-
-
-    public Todo(@NotBlank String content) {
-        this.content = content;
-        // TODO
-        this.phone = "+18888888888";
-        this.remindTime = new Timestamp(new Date().getTime());
-    }
-
-    public Todo(String content, boolean isCompleted) {
-        this(content);
-        this.isCompleted = isCompleted;
-    }
+    private LocalDateTime remindTime;
 }
