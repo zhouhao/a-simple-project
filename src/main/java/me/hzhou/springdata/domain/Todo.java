@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -39,9 +40,11 @@ public class Todo implements Serializable {
     private boolean isCompleted = false;
 
     @Column(name = "created_time")
+    @JsonProperty("created_time")
     private LocalDateTime createdTime;
 
     @NotNull
     @Column(name = "remind_time", nullable = false)
+    @JsonProperty("remind_time")
     private LocalDateTime remindTime;
 }

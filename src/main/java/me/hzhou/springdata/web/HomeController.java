@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.hzhou.springdata.domain.Todo;
@@ -31,7 +32,8 @@ public class HomeController {
     }
 
     @PostMapping("/todo")
-    public ResponseEntity<Todo> create(@Valid Todo todo) {
+    public ResponseEntity<Todo> create(@Valid @RequestBody Todo todo) {
+        todo.setId(null);// hack: make sure it is not updating existing one
         return ResponseEntity.ok(todoRepository.save(todo));
     }
 }
