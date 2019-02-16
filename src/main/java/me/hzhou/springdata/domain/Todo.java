@@ -1,7 +1,7 @@
 package me.hzhou.springdata.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,7 +32,7 @@ public class Todo implements Serializable {
     private String content;
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
@@ -39,8 +40,8 @@ public class Todo implements Serializable {
     private Boolean completed = false;
 
     @Column(name = "created_time")
-    private Timestamp createdTime;
+    private LocalDateTime createdTime;
 
     @Column(name = "remind_time", nullable = false)
-    private Timestamp remindTime;
+    private LocalDateTime remindTime;
 }

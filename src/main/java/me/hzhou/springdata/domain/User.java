@@ -1,7 +1,7 @@
 package me.hzhou.springdata.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,6 +30,6 @@ public class User implements Serializable {
     private String phone;
 
     @Column(name = "created_time")
-    private Timestamp createdTime;
+    private LocalDateTime createdTime;
 
 }
