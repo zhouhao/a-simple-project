@@ -1,25 +1,24 @@
 package me.hzhou.springdata.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
 @Table(name = "todo")
+@Entity
 @Data
-@NoArgsConstructor
 public class Todo implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -28,23 +27,20 @@ public class Todo implements Serializable {
     @Column(name = "id", insertable = false, nullable = false)
     private Integer id;
 
-    @NotBlank
     @Column(name = "content", nullable = false)
     private String content;
 
-    @NotNull
-    @Column(name = "phone", nullable = false)
-    private String phone;
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "is_completed")
-    private boolean isCompleted = false;
+    private Boolean completed = false;
 
     @Column(name = "created_time")
-    @JsonProperty("created_time")
-    private LocalDateTime createdTime;
+    private Timestamp createdTime;
 
-    @NotNull
     @Column(name = "remind_time", nullable = false)
-    @JsonProperty("remind_time")
-    private LocalDateTime remindTime;
+    private Timestamp remindTime;
 }
