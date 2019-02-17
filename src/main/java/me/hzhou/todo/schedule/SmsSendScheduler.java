@@ -1,4 +1,4 @@
-package me.hzhou.springdata.schedule;
+package me.hzhou.todo.schedule;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.plivo.api.exceptions.PlivoRestException;
 import lombok.extern.slf4j.Slf4j;
-import me.hzhou.springdata.domain.Todo;
-import me.hzhou.springdata.repository.TodoRepository;
-import me.hzhou.springdata.service.PlivoService;
+import me.hzhou.todo.domain.Todo;
+import me.hzhou.todo.repository.TodoRepository;
+import me.hzhou.todo.service.PlivoService;
 
 @Component
 @Slf4j
@@ -39,6 +39,6 @@ public class SmsSendScheduler {
             log.info("{}", todo);
         }
 
-        plivoService.send("Hello World", "${target}");
+        // plivoService.send("Hello World", "${target}");
     }
 }

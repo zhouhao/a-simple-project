@@ -1,4 +1,4 @@
-package me.hzhou.springdata;
+package me.hzhou.todo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,11 +7,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@EnableJpaRepositories("me.hzhou.springdata.repository")
-public class SpringDataApplication {
+@EnableJpaRepositories("me.hzhou.todo.repository")
+public class TodoApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringDataApplication.class, args);
+        SpringApplication.run(TodoApplication.class, args);
     }
 
 }

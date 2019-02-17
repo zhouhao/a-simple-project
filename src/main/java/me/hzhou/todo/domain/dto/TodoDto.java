@@ -1,4 +1,4 @@
-package me.hzhou.springdata.domain.dto;
+package me.hzhou.todo.domain.dto;
 
 import java.time.LocalDateTime;
 

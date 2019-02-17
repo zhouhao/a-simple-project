@@ -1,4 +1,4 @@
-package me.hzhou.springdata.config;
+package me.hzhou.todo.config;
 
 import org.springframework.context.annotation.Configuration;
 

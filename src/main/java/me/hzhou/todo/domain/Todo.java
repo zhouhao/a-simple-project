@@ -1,4 +1,4 @@
-package me.hzhou.springdata.domain;
+package me.hzhou.todo.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

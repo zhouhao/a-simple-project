@@ -1,4 +1,4 @@
-package me.hzhou.springdata.service;
+package me.hzhou.todo.service;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -13,7 +13,7 @@ import com.plivo.api.Plivo;
 import com.plivo.api.exceptions.PlivoRestException;
 import com.plivo.api.models.message.Message;
 import com.plivo.api.models.message.MessageCreateResponse;
-import me.hzhou.springdata.exception.MissingPropertyException;
+import me.hzhou.todo.exception.MissingPropertyException;
 
 @Service
 public class PlivoService {

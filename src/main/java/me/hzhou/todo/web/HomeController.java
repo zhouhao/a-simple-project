@@ -1,4 +1,4 @@
-package me.hzhou.springdata.web;
+package me.hzhou.todo.web;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import me.hzhou.springdata.domain.Todo;
-import me.hzhou.springdata.domain.dto.TodoDto;
-import me.hzhou.springdata.repository.TodoRepository;
-import me.hzhou.springdata.service.TodoService;
+import me.hzhou.todo.domain.Todo;
+import me.hzhou.todo.domain.dto.TodoDto;
+import me.hzhou.todo.repository.TodoRepository;
+import me.hzhou.todo.service.TodoService;
 
 @RestController
 public class HomeController {

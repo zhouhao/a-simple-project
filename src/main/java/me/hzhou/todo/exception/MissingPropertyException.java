@@ -1,4 +1,4 @@
-package me.hzhou.springdata.exception;
+package me.hzhou.todo.exception;
 
 public class MissingPropertyException extends RuntimeException {
 

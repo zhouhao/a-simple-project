@@ -1,4 +1,4 @@
-package me.hzhou.springdata.service;
+package me.hzhou.todo.service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -6,11 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import me.hzhou.springdata.domain.Todo;
-import me.hzhou.springdata.domain.User;
-import me.hzhou.springdata.domain.dto.TodoDto;
-import me.hzhou.springdata.repository.TodoRepository;
-import me.hzhou.springdata.repository.UserRepository;
+import me.hzhou.todo.domain.Todo;
+import me.hzhou.todo.domain.User;
+import me.hzhou.todo.domain.dto.TodoDto;
+import me.hzhou.todo.repository.TodoRepository;
+import me.hzhou.todo.repository.UserRepository;
 
 @Service
 public class TodoService {
