@@ -6,7 +6,9 @@ import java.util.Collections;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.plivo.api.Plivo;
@@ -16,7 +18,8 @@ import com.plivo.api.models.message.MessageCreateResponse;
 import me.hzhou.todo.exception.MissingPropertyException;
 
 @Service
-public class PlivoService {
+@Profile("!test")
+public class PlivoService implements ReminderService {
 
     @Value("${plivo.auth.id}")
     private String plivoAuthId;
@@ -33,7 +36,9 @@ public class PlivoService {
         Plivo.init(plivoAuthId, plivoAuthToken);
     }
 
-    public MessageCreateResponse send(String messge, String target) throws IOException, PlivoRestException {
-        return Message.creator(plivoSender, Collections.singletonList(target), messge).create();
+    @Override
+    public boolean send(String target, String message) throws IOException, PlivoRestException {
+        MessageCreateResponse resp = Message.creator(plivoSender, Collections.singletonList(target), message).create();
+        return resp != null && !CollectionUtils.isEmpty(resp.getMessageUuid());
     }
 }

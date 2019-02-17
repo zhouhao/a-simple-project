@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>me.hzhou</groupId>
-    <artifactId>spring-data</artifactId>
+    <artifactId>todo</artifactId>
     <version>0.0.1</version>
-    <name>spring-data</name>
+    <name>todo</name>
     <description>Todo service</description>
 
     <properties>
