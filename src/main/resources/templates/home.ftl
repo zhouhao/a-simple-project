@@ -1,4 +1,5 @@
 <#include "layout/layout.ftl"/>
+<#assign DateFormatUtils=statics['me.hzhou.todo.util.DateFormatUtils']>
 <#assign inlineJs>
     <script src="/js/app.js"></script>
 </#assign>
@@ -22,7 +23,7 @@
                         <th>${todo.id}</th>
                         <td>${todo.content}</td>
                         <td>${todo.user.name}</td>
-                        <td>${todo.remindTime}</td>
+                        <td>${DateFormatUtils.format(todo.remindTime)}</td>
                         <td><a href="#" data-id="${todo.id}" class="todo_action" data-method="complete"
                                data-confirm="Are you sure to mark this as completed?">Complete</a> |
                             <a href="#" data-id="${todo.id}" class="todo_action" data-method="delay"

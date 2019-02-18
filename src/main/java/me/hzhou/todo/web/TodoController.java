@@ -7,10 +7,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import me.hzhou.todo.domain.Todo;
@@ -80,5 +82,16 @@ public class TodoController {
     @PostMapping("/todo")
     public ResponseEntity<Todo> create(@Valid @RequestBody TodoDto todo) {
         return ResponseEntity.ok(todoService.save(todo));
+    }
+
+    @PostMapping("/sms")
+    public ResponseEntity<Todo> receive(@RequestParam("From") String from,
+                                        @RequestParam("To") String to,
+                                        @RequestParam("Text") String message) {
+        if (!StringUtils.isEmpty(message)) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
