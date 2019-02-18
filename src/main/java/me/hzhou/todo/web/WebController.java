@@ -24,7 +24,7 @@ public class WebController {
         this.todoRepository = todoRepository;
     }
 
-    @GetMapping("/")
+    @GetMapping("/dashboard")
     public String home(Model model) {
         model.addAttribute("users", userRepository.findAll());
         model.addAttribute("todos", todoRepository.findByCompletedAndRemindTimeAfter(false, LocalDateTime.now()));

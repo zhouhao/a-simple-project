@@ -3,7 +3,6 @@ package me.hzhou.todo.web;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,8 +103,9 @@ public class TodoController {
     public ResponseEntity<Todo> receive(@RequestParam("From") String from,
                                         @RequestParam("To") String to,
                                         @RequestParam("Text") String message) {
+        from = from.startsWith("+") ? from : "+" + from;
         log.info("from = {}, to = {}, message = {}", from, to, message);
-        if (!StringUtils.isEmpty(message)) {
+        if (StringUtils.isEmpty(message)) {
             return ResponseEntity.noContent().build();
         }
         User user = userRepository.findFirstByPhone(from);
