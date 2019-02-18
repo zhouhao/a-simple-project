@@ -27,7 +27,7 @@ public class WebController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("todos", todoRepository.findByRemindTimeAfter(LocalDateTime.now()));
+        model.addAttribute("todos", todoRepository.findByCompletedAndRemindTimeAfter(false, LocalDateTime.now()));
         return "home";
     }
 }

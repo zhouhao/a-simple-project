@@ -13,5 +13,5 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     List<Todo> findByCompletedAndRemindTimeBetween(Boolean isCompleted, LocalDateTime fromTime, LocalDateTime toTime);
 
-    List<Todo> findByRemindTimeAfter(LocalDateTime time);
+    List<Todo> findByCompletedAndRemindTimeAfter(Boolean isCompleted, LocalDateTime time);
 }

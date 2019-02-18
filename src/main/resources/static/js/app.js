@@ -23,4 +23,32 @@ $(function () {
         event.preventDefault();
         $(this).trigger('reset');
     });
+
+    $('.todo_action').on('click', function () {
+        let result = confirm($(this).data('confirm'));
+        if (result) {
+            let method = $(this).data('method');
+            let todoId = $(this).data('id');
+            if (method && todoId) {
+                postReq(todoId, method);
+            }
+        }
+    });
+
+
+    function postReq(todoId, method) {
+        $.ajax({
+            'url': `/todo/${todoId}/${method}`,
+            'method': 'POST',
+            'dataType': 'json',
+            'contentType': 'application/json',
+            'success': function () {
+                toastr.success("Success");
+            },
+            'error': function () {
+                toastr.error("Failure");
+            }
+
+        });
+    }
 });

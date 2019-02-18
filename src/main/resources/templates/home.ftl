@@ -11,7 +11,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Content</th>
+                    <th scope="col">User</th>
                     <th scope="col">Remind Time</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,7 +21,15 @@
                     <tr>
                         <th>${todo.id}</th>
                         <td>${todo.content}</td>
+                        <td>${todo.user.name}</td>
                         <td>${todo.remindTime}</td>
+                        <td><a href="#" data-id="${todo.id}" class="todo_action" data-method="complete"
+                               data-confirm="Are you sure to mark this as completed?">Complete</a> |
+                            <a href="#" data-id="${todo.id}" class="todo_action" data-method="delay"
+                               data-confirm="Are you sure to delay this 30 minutes?">Delay</a> |
+                            <a href="#" data-id="${todo.id}" class="todo_action" data-method="sms"
+                               data-confirm="Are you sure to send text message now?">SMS</a>
+                        </td>
                     </tr>
                 </#list>
                 </tbody>
