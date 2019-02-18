@@ -4,6 +4,29 @@
 </#assign>
 <@layout>
     <div class="jumbotron">
+        <div class="col-sm-12 mx-auto">
+            <h1>Incoming List</h1>
+            <table class="table table-bordered table-striped datatable">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Remind Time</th>
+                </tr>
+                </thead>
+                <tbody>
+                <#list todos as todo>
+                    <tr>
+                        <th>${todo.id}</th>
+                        <td>${todo.content}</td>
+                        <td>${todo.remindTime}</td>
+                    </tr>
+                </#list>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="jumbotron">
         <div class="col-sm-10 mx-auto">
             <h1>Add New Todo</h1>
             <form id="add_todo" method="post">
@@ -26,29 +49,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        </div>
-    </div>
-    <div class="jumbotron">
-        <div class="col-sm-12 mx-auto">
-            <h1>Incoming List</h1>
-            <table class="table table-bordered table-striped datatable">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Content</th>
-                    <th scope="col">Remind Time</th>
-                </tr>
-                </thead>
-                <tbody>
-                <#list todos as todo>
-                    <tr>
-                        <th>${todo.id}</th>
-                        <td>${todo.content}</td>
-                        <td>${todo.remindTime}</td>
-                    </tr>
-                </#list>
-                </tbody>
-            </table>
         </div>
     </div>
 </@layout>
