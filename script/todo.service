@@ -1,0 +1,11 @@
+[Unit]
+Description=Simple Web service for todo
+After=syslog.target
+
+[Service]
+User=root
+ExecStart=/var/todo/todo-service.jar
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
