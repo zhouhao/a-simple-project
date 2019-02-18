@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -43,4 +45,10 @@ public class Todo implements Serializable {
 
     @Column(name = "remind_time", nullable = false)
     private LocalDateTime remindTime;
+
+    @PrePersist
+    @PreUpdate
+    void onCreateOrUpdate() {
+        this.setCreatedTime(LocalDateTime.now());
+    }
 }
