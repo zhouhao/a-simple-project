@@ -1,4 +1,4 @@
-package me.hzhou.springdata;
+package me.hzhou.todo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
