@@ -14,7 +14,7 @@ create table todo
   user_id      int                                  not null,
   is_completed tinyint(1) default 0                 null,
   created_time timestamp  default current_timestamp null,
-  remind_time  timestamp                            not null,
+  remind_time  timestamp                            null,
   constraint todo_pk primary key (id)
 );
 
