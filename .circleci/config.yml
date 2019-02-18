@@ -34,7 +34,7 @@ jobs:
       - run:
           name: Maven Build & Test
           command: |
-            mvn clean test -Dspring.profiles.active=test
+            mvn clean package -Dspring.profiles.active=test
 
       - store_test_results:
           path: target/surefire-reports
