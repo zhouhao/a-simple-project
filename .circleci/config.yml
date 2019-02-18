@@ -1,0 +1,72 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk
+
+    working_directory: ~/repo
+
+    environment:
+      MAVEN_OPTS: -Xmx3200m
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+
+      # run tests!
+      - run:
+          name: Maven Build & Test
+          command: |
+            mvn clean test -Dspring.profiles.active=test
+
+      - store_test_results:
+          path: target/surefire-reports
+
+      - persist_to_workspace:
+          root: target
+          paths:
+            - todo-service.jar
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo/target
+      - run:
+          name: Deploy Over SSH
+          command: |
+            scp -o "StrictHostKeyChecking no" ~/repo/target/todo-service.jar $SSH_USER@$SSH_HOST:/var/todo/
+      - run:
+          name: restart website
+          command: |
+            ssh $SSH_USER@$SSH_HOST "systemctl restart todo.service"
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
