@@ -15,6 +15,8 @@ import com.plivo.api.Plivo;
 import com.plivo.api.exceptions.PlivoRestException;
 import com.plivo.api.models.message.Message;
 import com.plivo.api.models.message.MessageCreateResponse;
+import lombok.NonNull;
+import me.hzhou.todo.domain.Todo;
 import me.hzhou.todo.exception.MissingPropertyException;
 
 @Service
@@ -27,6 +29,8 @@ public class PlivoService implements ReminderService {
     private String plivoAuthToken;
     @Value("${plivo.source.number}")
     private String plivoSender;
+    @Value("${sms.template.reminder}")
+    private String smsTemplate;
 
     @PostConstruct
     public void plivoClient() {
@@ -37,7 +41,8 @@ public class PlivoService implements ReminderService {
     }
 
     @Override
-    public boolean send(String target, String message) throws IOException, PlivoRestException {
+    public boolean send(String target, @NonNull Todo todo) throws IOException, PlivoRestException {
+        String message = String.format(smsTemplate, todo.getContent());
         MessageCreateResponse resp = Message.creator(plivoSender, Collections.singletonList(target), message).create();
         return resp != null && !CollectionUtils.isEmpty(resp.getMessageUuid());
     }

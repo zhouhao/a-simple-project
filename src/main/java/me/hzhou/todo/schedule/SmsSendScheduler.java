@@ -35,7 +35,7 @@ public class SmsSendScheduler {
         List<Todo> todos = todoRepository.findByCompletedAndRemindTimeBetween(false, fromTime, toTime);
         for (Todo todo : todos) {
             log.info("{}", todo);
-            reminderService.send(todo.getUser().getPhone(), todo.getContent() + " - " + todo.getRemindTime());
+            reminderService.send(todo.getUser().getPhone(), todo);
         }
     }
 }
