@@ -1,6 +1,5 @@
 $(function () {
     $("#add_todo").submit(function (event) {
-        alert("Handler for .submit() called.");
         let data = {};
         $(this).serializeArray().map(function (x) {
             data[x.name] = x.value;
