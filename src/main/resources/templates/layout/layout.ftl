@@ -70,7 +70,9 @@
     <script type="text/javascript" src="//cdn.datatables.net/v/bs4/dt-1.10.18/datatables.min.js"></script>
     <script>
         $(function () {
-            $('.datatable').DataTable();
+            $('.datatable').DataTable({
+                responsive: true
+            });
         });
     </script>
     ${inlineJs!""}
