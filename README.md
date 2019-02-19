@@ -1,7 +1,7 @@
 # A simple TODO service
 [![CircleCI](https://circleci.com/gh/zhouhao/simple-todo-service.svg?style=svg)](https://circleci.com/gh/zhouhao/simple-todo-service)
 ### Background
-My lovely wife always asks me to remind her something. But... I have a worse memory...
+My lovely wife always asks me to remind her something. But... I have a so bad memory...
 
 ### What it is
 1. It has a simple web UI, with which I can create a new todo item, and manage all todo items from now.
