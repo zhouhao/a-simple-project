@@ -4,9 +4,9 @@
 My lovely wife always asks me to remind her something. But... I have a so bad memory...
 
 ### What it is
-1. It has a simple web UI, with which I can create a new todo item, and manage all todo items from now.
+1. It has a simple [web UI](https://github.com/zhouhao/simple-todo-service/blob/master/other/screenshot-1.png), with which I can create a new todo item, and manage all todo items.
 2. It has a schedule job, which runs every 10 minutes, and send sms to the target about something todo in the coming half an hour.
-3. Sms receiver can replay message to make the todo as completed, or delay it for half an hour.
+3. User can reply message to make the todo as completed, or delay it for half an hour.
 4. That's all now.
 
 ### How to run
