@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import me.hzhou.todo.config.ReminderProp;
+import me.hzhou.todo.domain.ReceivedSms;
 import me.hzhou.todo.domain.ReminderHistory;
 import me.hzhou.todo.domain.Todo;
 import me.hzhou.todo.domain.User;
 import me.hzhou.todo.domain.dto.TodoDto;
 import me.hzhou.todo.domain.dto.UserDto;
+import me.hzhou.todo.repository.ReceivedSmsRepository;
 import me.hzhou.todo.repository.ReminderHistoryRepository;
 import me.hzhou.todo.repository.TodoRepository;
 import me.hzhou.todo.repository.UserRepository;
@@ -39,17 +41,20 @@ public class TodoController {
     private final ReminderProp reminderProp;
     private final UserRepository userRepository;
     private final ReminderHistoryRepository reminderHistoryRepository;
+    private final ReceivedSmsRepository receivedSmsRepository;
 
     @Autowired
     public TodoController(TodoRepository todoRepository, TodoService todoService,
                           ReminderService reminderService, ReminderProp reminderProp,
-                          UserRepository userRepository, ReminderHistoryRepository reminderHistoryRepository) {
+                          UserRepository userRepository, ReminderHistoryRepository reminderHistoryRepository,
+                          ReceivedSmsRepository receivedSmsRepository) {
         this.todoRepository = todoRepository;
         this.todoService = todoService;
         this.reminderService = reminderService;
         this.reminderProp = reminderProp;
         this.userRepository = userRepository;
         this.reminderHistoryRepository = reminderHistoryRepository;
+        this.receivedSmsRepository = receivedSmsRepository;
     }
 
     @GetMapping("/todo/{id}")
@@ -120,6 +125,7 @@ public class TodoController {
         if (StringUtils.isEmpty(message)) {
             return ResponseEntity.noContent().build();
         }
+        receivedSmsRepository.save(new ReceivedSms(from, to, message));
         User user = userRepository.findFirstByPhone(from);
         if (user == null) {
             log.warn("User not found by phone = {}", from);
