@@ -11,7 +11,7 @@ My lovely wife always asks me to remind her something. But... I have a so bad me
 
 ### How to run
 #### Dev
-1. Just set active profile to `test`, and start it from Intellij or with Maven. (Use H2 memory database, and no sms will be sent)
+1. Just set active profile to `test`, and start it from Intellij or with Maven. (The application will use [H2 memory database](http://127.0.0.1:8888/h2-console), but no sms will be sent)
 2. If you have [Plivo account](https://www.plivo.com/), You can update the [configuration](https://github.com/zhouhao/simple-todo-service/blob/master/src/main/resources/application.properties#L10-L12), and run with `active profile = dev`, so that you can receive real sms
 
 ### deploy to server
