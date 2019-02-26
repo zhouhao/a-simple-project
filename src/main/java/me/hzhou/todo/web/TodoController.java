@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -101,8 +102,13 @@ public class TodoController {
     }
 
     @PostMapping("/user")
-    public ResponseEntity<User> create(@Valid @RequestBody UserDto user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody UserDto user) {
         return ResponseEntity.ok(todoService.save(user));
+    }
+
+    @PutMapping("/user")
+    public ResponseEntity<User> updateUser(@Valid @RequestBody UserDto user) {
+        return ResponseEntity.ok(todoService.update(user));
     }
 
     @PostMapping("/sms")

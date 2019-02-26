@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.NonNull;
 import me.hzhou.todo.domain.Todo;
 import me.hzhou.todo.domain.User;
 import me.hzhou.todo.domain.dto.TodoDto;
@@ -24,7 +25,7 @@ public class TodoService {
         this.userRepository = userRepository;
     }
 
-    public Todo save(TodoDto todoDto) {
+    public Todo save(@NonNull TodoDto todoDto) {
         Optional<User> user = userRepository.findById(todoDto.getUserId());
         Todo out = new Todo();
         if (user.isPresent()) {
@@ -37,7 +38,7 @@ public class TodoService {
         return out;
     }
 
-    public User save(UserDto user) {
+    public User save(@NonNull UserDto user) {
         User out = userRepository.findFirstByNameOrPhone(user.getName(), user.getPhone());
         if (out != null) {
             return null;
@@ -45,6 +46,20 @@ public class TodoService {
         out = new User();
         out.setName(user.getName());
         out.setPhone(user.getPhone());
+        return userRepository.save(out);
+    }
+
+    public User update(@NonNull UserDto user) {
+        if (user.getId() == null || user.getId() < 1) {
+            return null;
+        }
+        Optional<User> opt = userRepository.findById(user.getId());
+        if (!opt.isPresent()) {
+            return null;
+        }
+        User out = opt.get();
+        out.setPhone(user.getPhone());
+        out.setName(user.getName());
         return userRepository.save(out);
     }
 }
