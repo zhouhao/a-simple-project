@@ -8,4 +8,6 @@ import me.hzhou.todo.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findFirstByPhone(@NotNull String phone);
+
+    User findFirstByNameOrPhone(String name, String phone);
 }

@@ -21,6 +21,7 @@ import me.hzhou.todo.domain.ReminderHistory;
 import me.hzhou.todo.domain.Todo;
 import me.hzhou.todo.domain.User;
 import me.hzhou.todo.domain.dto.TodoDto;
+import me.hzhou.todo.domain.dto.UserDto;
 import me.hzhou.todo.repository.ReminderHistoryRepository;
 import me.hzhou.todo.repository.TodoRepository;
 import me.hzhou.todo.repository.UserRepository;
@@ -97,6 +98,11 @@ public class TodoController {
     @PostMapping("/todo")
     public ResponseEntity<Todo> create(@Valid @RequestBody TodoDto todo) {
         return ResponseEntity.ok(todoService.save(todo));
+    }
+
+    @PostMapping("/user")
+    public ResponseEntity<User> create(@Valid @RequestBody UserDto user) {
+        return ResponseEntity.ok(todoService.save(user));
     }
 
     @PostMapping("/sms")
