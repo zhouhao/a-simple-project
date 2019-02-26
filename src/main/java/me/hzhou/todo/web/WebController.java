@@ -30,4 +30,10 @@ public class WebController {
         model.addAttribute("todos", todoRepository.findByCompletedAndRemindTimeAfter(false, LocalDateTime.now()));
         return "home";
     }
+
+    @GetMapping("/dashboard/user")
+    public String user(Model model) {
+        model.addAttribute("users", userRepository.findAll());
+        return "user";
+    }
 }

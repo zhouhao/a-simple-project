@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import me.hzhou.todo.domain.Todo;
 import me.hzhou.todo.domain.User;
 import me.hzhou.todo.domain.dto.TodoDto;
+import me.hzhou.todo.domain.dto.UserDto;
 import me.hzhou.todo.repository.TodoRepository;
 import me.hzhou.todo.repository.UserRepository;
 
@@ -34,5 +35,16 @@ public class TodoService {
             out = todoRepository.save(out);
         }
         return out;
+    }
+
+    public User save(UserDto user) {
+        User out = userRepository.findFirstByNameOrPhone(user.getName(), user.getPhone());
+        if (out != null) {
+            return null;
+        }
+        out = new User();
+        out.setName(user.getName());
+        out.setPhone(user.getPhone());
+        return userRepository.save(out);
     }
 }

@@ -48,6 +48,9 @@
                             <a class="dropdown-item" href="#">页面好看</a>
                         </div>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/user">用户管理</a>
+                    </li>
                 </ul>
                 <form class="form-inline my-2 my-md-0">
                     <input class="form-control" type="text" placeholder="Not Available" aria-label="Search">
