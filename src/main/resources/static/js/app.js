@@ -4,19 +4,11 @@ $(function () {
         $(this).serializeArray().map(function (x) {
             data[x.name] = x.value;
         });
-        $.ajax({
-            'url': '/todo',
-            'method': 'POST',
-            'dataType': 'json',
-            'contentType': 'application/json',
-            'data': JSON.stringify(data),
-            'success': function () {
-                toastr.success("Todo is added successfully");
-            },
-            'error': function () {
-                toastr.error("failed to add todo");
-            }
 
+        request('/todo', 'POST', data, function () {
+            toastr.success("Todo is added successfully");
+        }, function () {
+            toastr.error("failed to add todo");
         });
         event.preventDefault();
         $(this).trigger('reset');
@@ -28,7 +20,13 @@ $(function () {
             let method = $(this).data('method');
             let todoId = $(this).data('id');
             if (method && todoId) {
-                postReq(todoId, method);
+                request(`/todo/${todoId}/${method}`, 'POST', {},
+                    function () {
+                        toastr.success("Success");
+                    },
+                    function () {
+                        toastr.error("Failure");
+                    });
             }
         }
     });
@@ -38,38 +36,51 @@ $(function () {
         $(this).serializeArray().map(function (x) {
             data[x.name] = x.value;
         });
-        $.ajax({
-            'url': '/user',
-            'method': 'POST',
-            'dataType': 'json',
-            'contentType': 'application/json',
-            'data': JSON.stringify(data),
-            'success': function () {
-                toastr.success("New user is added successfully");
-            },
-            'error': function () {
-                toastr.error("failed to add new User");
-            }
-
+        let self = this;
+        request('/user', 'POST', data, function () {
+            toastr.success("New user is added successfully");
+            $(self).trigger('reset');
+        }, function () {
+            toastr.error("failed to add new User");
         });
         event.preventDefault();
-        $(this).trigger('reset');
+    });
+
+    $('.user-update-action').on('click', function () {
+        const tr = $(this).closest('tr');
+        $('#user-id').val(tr.find('.id').html());
+        $('#name').val(tr.find('.name').html());
+        $('#phone').val(tr.find('.phone').html());
+        $('#user-update-modal').modal('show')
+    });
+
+    $("#update_user").submit(function (event) {
+        let data = {};
+        $(this).serializeArray().map(function (x) {
+            data[x.name] = x.value;
+        });
+        let self = this;
+        request('/user', 'PUT', data, function () {
+            toastr.success("User is updated successfully");
+            $(self).trigger('reset');
+            $('#user-update-modal').modal('hide');
+        }, function () {
+            toastr.error("failed to update User Info");
+        });
+        event.preventDefault();
     });
 
     /*************** Utils Method below ***************/
-    function postReq(todoId, method) {
+
+    function request(url, method, data, success, error) {
         $.ajax({
-            'url': `/todo/${todoId}/${method}`,
-            'method': 'POST',
+            'url': url,
+            'method': method,
             'dataType': 'json',
             'contentType': 'application/json',
-            'success': function () {
-                toastr.success("Success");
-            },
-            'error': function () {
-                toastr.error("Failure");
-            }
-
-        });
+            'data': JSON.stringify(data),
+            'success': success,
+            'error': error
+        })
     }
 });
